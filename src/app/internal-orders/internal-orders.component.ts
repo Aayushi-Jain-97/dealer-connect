@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { DataTableDirective } from 'angular-datatables';
+import { HttpClient,HttpResponse } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-internal-orders',
@@ -6,10 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./internal-orders.component.css']
 })
 export class InternalOrdersComponent implements OnInit {
+  constructor(private http: HttpClient){}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit(): void {}
 }

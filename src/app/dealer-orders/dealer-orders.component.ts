@@ -34,7 +34,7 @@ export class DealerOrdersComponent implements OnDestroy,OnInit,AfterViewInit {
   ngOnInit():void {
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 2,
+      pageLength: 3,
     };
     this.http.get('https://jsonplaceholder.typicode.com/todos')
       .subscribe((persons:any) => {
@@ -49,18 +49,28 @@ export class DealerOrdersComponent implements OnDestroy,OnInit,AfterViewInit {
     this.subject.unsubscribe();
   }
 
-  ngAfterViewInit(): void {
-    // this.datatableElement.dtInstance.then(function(dtInstance: DataTables.Api) {
-    //   dtInstance.columns().every(function () {
-    //     const that = this;
-    //     $('input', this.footer()).on('keyup change', function () {
-    //       if (that.search() !== this['value']) {
-    //         that
-    //           .search(this['value'])
-    //           .draw();
-    //       }
-    //     });
-    //   });
-    // });
+  ngAfterViewInit() {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      destroy:true,
+      pageLength: 3,
+    };
+    this.http.get('https://jsonplaceholder.typicode.com/todos')
+      .subscribe((persons:any) => {
+         this.subject.next();
+         this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          dtInstance.columns().every(function () {
+              const that = this;
+              $('input', this.footer()).on('keyup change', function () {
+                  console.log('search(): ' + that.search());
+                  console.log('value: ' + this['value']);
+                  if (that.search() !== this['value']) {
+                      that.search(this['value'])
+                          .draw();
+                  }
+              });
+          });
+         });
+      });
   }
 }

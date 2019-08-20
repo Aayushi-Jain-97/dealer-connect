@@ -24,7 +24,7 @@
                       </div>
                       <!-- /.box-header -->          
                     <div class="box-body table-responsive">
-            <table datatable [dtOptions]="dtOptions" [dtTrigger]="subject" class="table table-bordered row-border hover">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="subject" class="table table-bordered row-border table-striped">
                 <thead>
                     <!-- <tr>
                         <th><input type="text" placeholder="Search User ID" name="search-uid"/></th>
@@ -55,14 +55,31 @@
                     <td>{{ person.completed }}</td>
                     <td>{{ person.userId }}</td>
                     <td>{{ person.id }}</td>
-                    <td>{{ person.title }}</td>
+                    <td>4500</td>
                     <td>{{ person.completed }}</td>
                     <td>{{ person.userId }}</td>
                     <td>{{ person.id }}</td>
                     <td>{{ person.title }}</td>
-                    <td>{{ person.completed }}</td>
+                    <td><button type="button" class="btn" style="background-color: #28669b;color:#fff;">Order Details</button></td>
                   </tr>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th><input type="text" placeholder="Search.." name="search-user-id" style="width: 70px;"/></th>
+                        <th><input type="text" placeholder="Search.." name="search-id"  style="width: 70px;"/></th>
+                        <th><input type="text" placeholder="Search.." name="search-title"  style="width: 115px;"/></th>
+                        <th><input type="text" placeholder="Search.." name="search-completed"  style="width: 70px;" /></th>
+                        <th><input type="text" placeholder="Search.." name="search-user-id"  style="width: 70px;" /></th>
+                        <th><input type="text" placeholder="Search.." name="search-id"  style="width: 70px;"/></th>
+                        <th><input type="text" placeholder="Search.." name="search-title"  style="width: 70px;"/></th>
+                        <th><input type="text" placeholder="Search.." name="search-completed"  style="width: 70px;"/></th>
+                        <th><input type="text" placeholder="Search.." name="search-user-id"  style="width: 70px;"/></th>
+                        <th><input type="text" placeholder="Search.." name="search-id"  style="width: 70px;"/></th>
+                        <th><input type="text" placeholder="Search.." name="search-title"  style="width: 115px;"/></th>
+                        <th><input type="text" placeholder="Search.." name="search-completed"  style="width: 70px;"/></th>
+      
+                      </tr>
+                  </tfoot>
                 </table>
                 </div>
                 </div>

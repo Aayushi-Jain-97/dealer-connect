@@ -1,4 +1,10 @@
-<header class="main-header">
+<div style="left: 0;
+position: fixed;
+right: 0;
+top: 0;
+z-index: 999;">
+<header class="main-header" style="border-radius: 2px;
+box-shadow: 0px 2px 10px #999;">
 
     <!-- Logo -->
     <div class="logo">
@@ -40,19 +46,13 @@
 
     </nav>
   </header>
+</div>
   <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
+  <aside class="main-sidebar" style="position: fixed;">
     <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
+    <section class="sidebar" style="padding-top: 20px;">
       <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="" class="img-circle" alt="">
-        </div>
-        <div class="pull-left info">
-          
-        </div>
-      </div>
+      
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li routerLinkActive="active">

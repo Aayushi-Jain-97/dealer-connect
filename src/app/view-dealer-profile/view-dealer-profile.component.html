@@ -1,0 +1,454 @@
+<div class="wrapper">
+    <app-header></app-header>
+     <!-- Content Wrapper. Contains page content -->
+     <div class="content-wrapper" style="padding-top:50px;">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Dashboard
+            <small>Version 2.0</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a [routerLink]="['/dashboard']"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dealer Profile Details</li>
+          </ol>
+        </section>
+          <!-- Main content -->
+          <ng-container *ngIf="profile?.length">
+    <section class="invoice" *ngFor="let dealer of profile">
+        <!-- title row -->
+        <div class="row">
+          <div class="col-xs-12">
+            <h2 class="page-header">
+              <i class="fa fa-globe"></i> Dealer Profile Details
+              <!-- <small class="pull-right">Date: 2/10/2014</small> -->
+            </h2>
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- info row -->
+        <div class="row invoice-info">
+          <div class="col-sm-4 invoice-col">
+            <address>
+              <strong>Dealer Firm Name</strong><br>
+              {{dealer.dealer_firm_name}}
+            </address>
+          </div>
+          <!-- /.col -->
+          <div class="col-sm-4 invoice-col">
+            <address>
+              <strong>Dealer Owner Name</strong><br>
+              {{dealer.dealer_owner_name}}
+            </address>
+          </div>
+          <!-- /.col -->
+          <div class="col-sm-4 invoice-col">
+              <b>Mobile :</b> {{dealer.mobile}} <button type="button" class="btn btn-success" style="margin-left: 10px;" data-toggle="modal" data-target="#modal-default1">CHANGE</button><br>
+              <br>
+            <b>Dealer ID :</b> {{id}}<br>
+            <b>Kaveri Code :</b> {{dealer.kaveri_code}}<br>
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+  
+        <!-- Table row -->
+        <div class="row">
+          <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+              <thead>
+              <tr>
+                <th>Email Id</th>
+                <th>Ship To Address</th>
+                <th>Bill To Address </th>
+                <th>Location</th>
+                <th>Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr [ngClass]="{'table-back':contenteditable}">
+                <td [attr.contenteditable]="contenteditable" #name (input)="onRowClick($event, 'email')">{{dealer.email}}</td>
+                <td [attr.contenteditable]="contenteditable" (input)="onRowClick($event, 'ship_to_address')">{{dealer.ship_to_address}}</td>
+                <td [attr.contenteditable]="contenteditable" (input)="onRowClick($event, 'bill_to_address')">{{dealer.bill_to_address}}</td>
+                <td [attr.contenteditable]="contenteditable" (input)="onRowClick($event, 'location')">{{dealer.location}}</td>
+                <td><button type="button" class="btn btn-success" (click)="editTable()">{{buttonVal}}</button></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+  
+        <div class="row">
+          <!-- accepted payments column -->
+          <div class="col-xs-6">
+            <p class="lead"> DEPOT-ROUTE</p>
+            <div class="table-responsive text-muted well well-sm no-shadow">
+                <table class="table">
+                  <tr>
+                    <th style="width:50%">Depot (Route)</th>
+                    <th>Action</th>
+                  </tr>
+                  <tr>
+                    <td style="padding-top:5px;">{{dealer.depot_name}} ({{dealer.route_id}})</td>
+                    <td style="padding-top:5px;"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default2">CHANGE</button></td>
+                  </tr>
+                </table>
+              </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-xs-6">
+            <p class="lead">BRANDS</p>
+  
+            <div class="table-responsive text-muted well well-sm no-shadow">
+                <table class="table">
+                    <tr>
+                      <th style="width:50%">Brands Authorized</th>
+                      <th>Action</th>
+                    </tr>
+                    <tr>
+                      <td style="padding-top:5px;">{{dealer.kaveri_brands}}</td>
+                      <td style="padding-top:5px;"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default3">CHANGE</button></td>
+                    </tr>
+                  </table>
+            </div>
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <!-- accepted payments column -->
+            <div class="col-xs-6">
+              <p class="lead"> SALESMAN</p>
+              <div class="table-responsive text-muted well well-sm no-shadow">
+                <table class="table">
+                    <tr>
+                      <th style="width:50%">Salesman</th>
+                      <th>Action</th>
+                    </tr>
+                    <tr>
+                      <td style="padding-top:5px;">{{dealer.name}}</td>
+                      <td style="padding-top:5px;"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default4">CHANGE</button></td>
+                    </tr>
+                  </table>
+                </div>
+            </div>
+            <!-- /.col -->
+            <div class="col-xs-6">
+              <p class="lead">REWARDS</p>
+    
+              <div class="table-responsive text-muted well well-sm no-shadow">
+                <table class="table">
+                    <tr>
+                      <th style="width:50%">Balance</th>
+                      <th>History</th>
+                    </tr>
+                    <tr>
+                      <td style="padding-top:5px;">4222 Points</td>
+                      <td style="padding-top:5px;"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-rewards">VIEW</button></td>
+                    </tr>
+                  </table>
+              </div>
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+          <div class="row no-print">
+            <div class="col-xs-12 " style="text-align: center;">
+              <button type="button" class="btn btn-primary" style="margin-right: 5px;background-color: #28669b;" (click)="saveProfile()">
+                <i class="fa fa-download" style="color: white;"></i> SAVE CHANGES
+              </button>
+            </div>
+          </div>
+          <!--modal start-->
+          <div class="modal fade" id="modal-default4">
+            <div class="modal-dialog">
+              <div class="modal-content" style="border-top-color: #00a65a;border-radius: 3px;border-top: 3px solid #00a65a;">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title">Salesman</h4>
+                </div>
+                <div class="modal-body">
+            <!-- form start -->
+            <form role="form" [formGroup]="dealerForm" (ngSubmit)="onSubmit4()">
+              <div class="box-body">
+                <div class="form-group">
+                  <label>Salesman</label>
+                  <select class="form-control" formControlName="salesman_id">
+                    <ng-container *ngIf="salesman?.length">
+                    <option  *ngFor="let sman of salesman" [ngValue]="sman.id">{{sman.name}}</option>
+                    </ng-container>
+                  </select>
+                </div>       
+                <button type="submit" class="btn btn-success" style="float: right" >CHANGE</button>
+              </div>
+              <!-- /.box-body -->
+            </form>
+                </div>
+                
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+          <!-- /.modal -->
+            <!--modal start-->
+            <div class="modal fade" id="modal-default3">
+            <div class="modal-dialog">
+                <div class="modal-content" style="border-top-color: #00a65a;border-radius: 3px;border-top: 3px solid #00a65a;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Brands Authorized</h4>
+                </div>
+                <div class="modal-body">
+            <!-- form start -->
+            <form role="form" [formGroup]="dealerForm" (ngSubmit)="onSubmit3()">
+                <div class="box-body">
+                <div class="form-group">
+                    <label>Select Brand Name</label>
+                    <select class="form-control" formControlName="kaveri_brands">
+                        <option value ="KAV">Kaveri </option>
+                        <option value ="GKAV">Ganga Kaveri </option>
+                        <option value ="GKAV,KAV" *ngIf="profile[0]['kaveri_brands'] == 'GKAV,KAV'">BOTH </option>
+                        <option value ="KAV,GKAV" *ngIf="profile[0]['kaveri_brands'] == 'KAV,GKAV'">BOTH </option>
+                    </select>
+                    </div>      
+                <button type="submit" class="btn btn-success" style="float: right">CHANGE</button>
+                </div>
+                <!-- /.box-body -->
+            </form>
+                </div>
+                
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+            <!--modal start-->
+            <div class="modal fade" id="modal-default2">
+            <div class="modal-dialog">
+                <div class="modal-content" style="border-top-color: #00a65a;border-radius: 3px;border-top: 3px solid #00a65a;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Depot</h4>
+                </div>
+                <div class="modal-body">
+            <!-- form start -->
+            <form role="form" [formGroup]="dealerForm" (ngSubmit)="onSubmit2()">
+                <div class="box-body">
+                    <div class="form-group">
+                    <label>Depot</label>
+                    <select class="form-control" formControlName="depot_id" (change)="getRoute()">
+                        <ng-container *ngIf="depot?.length">
+                        <option *ngFor="let dept of depot" [ngValue]="dept.id">{{dept.name}}</option>
+                        </ng-container>
+                    </select>
+                    </div>
+                    <div class="form-group">
+                    <label>Route</label>
+                    <select class="form-control" formControlName="route_id" (change)="setRoute()">
+                        <ng-container>
+                        <option [ngValue]="rout.id" *ngFor="let rout of route">{{rout.id}}</option>
+                        </ng-container>
+                    </select>
+                    </div>
+                    <div class="form-group">
+                    <label>Show Route</label>
+                    <textarea class="form-control" rows="3" formControlName="route_name"></textarea>
+                    </div>      
+                <button type="submit" class="btn btn-success" style="float: right">CHANGE</button>
+                </div>
+                <!-- /.box-body -->
+            </form>
+                </div>
+                
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+        <!--modal start-->
+        <div class="modal fade" id="modal-default1">
+        <div class="modal-dialog">
+            <div class="modal-content" style="border-top-color: #00a65a;border-radius: 3px;border-top: 3px solid #00a65a;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Dealer Mobile</h4>
+            </div>
+            <div class="modal-body">
+        <!-- form start -->
+        <form role="form" [formGroup]="dealerForm" (ngSubmit)="onSubmit1()">
+            <div class="box-body">
+                <div class="form-group" [ngClass]="{'has-error' : displayCssFor('mobile')}">
+                    <label>Enter Dealer's New Mobile Number (only 10 digits allowed)</label>
+                    <input type="text" class="form-control" placeholder="Enter mobile" formControlName="mobile">
+                    <div class="has-error" *ngIf="f.mobile.invalid && (f.mobile.dirty || f.mobile.touched)">     
+                      <span class="help-block" *ngIf="f.mobile.hasError('required')">mobile is required</span>
+                      <span class="help-block" *ngIf="f.mobile.errors.maxlength">mobile number must be of 10 digits</span>
+                      <span class="help-block" *ngIf="f.mobile.errors.pattern">mobile number must be only digits</span>   <span class="help-block" *ngIf="f.mobile.errors.minlength">mobile number must be of atleast 10 digits</span>
+                    </div>
+                  </div>      
+            <button type="submit" class="btn btn-success" style="float: right" [disabled]="!dealerForm.valid">CHANGE</button>
+            </div>
+            <!-- /.box-body -->
+        </form>
+            </div>
+            
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+        <!--modal start-->
+        <div class="modal fade" id="modal-rewards">
+            <div class="modal-dialog">
+                <div class="modal-content" style="border-top-color: #00a65a;border-radius: 3px;border-top: 3px solid #00a65a;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Rewards</h4>
+                </div>
+                <div class="modal-body">
+            <!-- /.col -->
+        <div class="">
+            <div class="nav-tabs-custom">
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#all" data-toggle="tab">All</a></li>
+                <li><a href="#redeem" data-toggle="tab">Redeemptions</a></li>
+                <li><a href="#pending" data-toggle="tab">Pending</a></li>
+              </ul>
+              <div class="tab-content">
+                <div class="active tab-pane" id="all">
+                 
+                </div>
+                <!-- /.tab-pane -->
+                <div class="tab-pane" id="redeem">
+                  <!-- The timeline -->
+                  <ul class="timeline timeline-inverse">
+                    <!-- timeline time label -->
+                    <li class="time-label">
+                          <span class="bg-green">
+                            10 Feb. 2014
+                          </span>
+                    </li>
+                    <!-- /.timeline-label -->
+                    <!-- timeline item -->
+                    <li>
+                      <i class="fa fa-envelope" style="background-color: #28669b;color: white;"></i>
+  
+                      <div class="timeline-item">
+                        <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+  
+                        <h3 class="timeline-header" ><a href="#" style="color: #28669b">Ref. order #1911692</a></h3>
+  
+                        <div class="timeline-body">
+                            scheme: Basic Points (Premium)
+                            <a class="btn btn-danger btn-xs" style="float: right">+100</a>
+                        </div>
+                      </div>
+                    </li>
+                    <!-- END timeline item -->
+                    <!-- timeline item -->
+                    <li>
+                        <i class="fa fa-envelope" style="background-color: #28669b;color: white;"></i>
+    
+                        <div class="timeline-item">
+                          <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+    
+                          <h3 class="timeline-header" ><a href="#" style="color: #28669b">Ref. order #1911692</a></h3>
+    
+                          <div class="timeline-body">
+                              scheme: Basic Points (Premium)
+                              <a class="btn btn-danger btn-xs" style="float: right">+100</a>
+                          </div>
+                        </div>
+                      </li>
+                      <!-- END timeline item -->
+                    
+                    <!-- timeline time label -->
+                    <li class="time-label">
+                          <span class="bg-green">
+                            3 Jan. 2014
+                          </span>
+                    </li>
+                    <!-- /.timeline-label -->
+                   <!-- timeline item -->
+                   <li>
+                      <i class="fa fa-envelope bg-blue"></i>
+  
+                      <div class="timeline-item">
+                        <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+  
+                        <h3 class="timeline-header"><a href="#">Ref. order #1911692</a></h3>
+  
+                        <div class="timeline-body">
+                            scheme: Basic Points (Premium)
+                        </div>
+                        <div class="timeline-footer">
+                        </div>
+                      </div>
+                    </li>
+                    <!-- timeline item -->
+                   <li>
+                      <i class="fa fa-envelope bg-blue"></i>
+  
+                      <div class="timeline-item">
+                        <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+  
+                        <h3 class="timeline-header"><a href="#">Ref. order #1911692</a></h3>
+  
+                        <div class="timeline-body">
+                            scheme: Basic Points (Premium)
+                        </div>
+                        <div class="timeline-footer">
+                        </div>
+                      </div>
+                    </li>
+                    <!-- END timeline item -->
+                    <li>
+                      <i class="fa fa-clock-o bg-gray"></i>
+                    </li>
+                  </ul>
+                </div>
+                <!-- /.tab-pane -->
+  
+                <div class="tab-pane" id="pending">
+                  
+                </div>
+                <!-- /.tab-pane -->
+              </div>
+              <!-- /.tab-content -->
+            </div>
+            <!-- /.nav-tabs-custom -->
+          </div>
+          <!-- /.col -->
+                </div>
+                
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->                             
+      </section>
+      <!-- /.content -->
+    </ng-container>
+      <div class="clearfix"></div>
+      </div>
+      <!-- /.content-wrapper -->   
+    </div>
+    <!-- ./wrapper -->
+   

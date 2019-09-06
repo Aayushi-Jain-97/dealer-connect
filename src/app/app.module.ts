@@ -14,6 +14,11 @@ import { HomeBannersComponent } from './home-banners/home-banners.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { ReportsComponent } from './reports/reports.component';
 import { DealerOrdersComponent } from './dealer-orders/dealer-orders.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { ViewDealerProfileComponent } from './view-dealer-profile/view-dealer-profile.component';
+import { SalesmenProfilesComponent } from './salesmen-profiles/salesmen-profiles.component';
 
 @NgModule({
   declarations: [
@@ -27,13 +32,19 @@ import { DealerOrdersComponent } from './dealer-orders/dealer-orders.component';
     HomeBannersComponent,
     FeedbackComponent,
     ReportsComponent,
-    DealerOrdersComponent
+    DealerOrdersComponent,
+    ViewDealerProfileComponent,
+    SalesmenProfilesComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    DataTablesModule
+    DataTablesModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot() // ToastrModule added
+
   ],
   providers: [],
   bootstrap: [AppComponent]

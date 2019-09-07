@@ -39,6 +39,10 @@ export class ApiService {
     const params = new HttpParams().set('id', id);
     return this.httpClient.get(`${this.PHP_API_SERVER}/api/dealer-profiles/viewDealer.php`, {params:params});
   }
+  getTotalRewards(id){
+    const params = new HttpParams().set('id', id);
+    return this.httpClient.get(`${this.PHP_API_SERVER}/api/dealer-profiles/rewards.php`, {params:params});
+  }
 
   editDealer(dealer){
     return this.httpClient.put(`${this.PHP_API_SERVER}/api/dealer-profiles/editDealer.php`, dealer);

@@ -42,7 +42,6 @@ export class ViewDealerProfileComponent implements OnInit {
         this.dealerForm.patchValue({'bill_to_address':profile[0]['bill_to_address']});
         this.dealerForm.patchValue({'location':profile[0]['location']});
         this.dealerForm.patchValue({'email':profile[0]['email']});
-
       });
       });   
       this.apiService.selectSalesman().subscribe((salesman:any)=>{
@@ -63,6 +62,12 @@ export class ViewDealerProfileComponent implements OnInit {
           }
         });
       });
+      this.apiService.getTotalRewards(this.id).subscribe((reward:any)=>{
+        if(!reward['error_status']){
+        this.profile[0]['rewards']=reward['total_rewards'];
+        }
+      });
+
        //reactive form declaration
   this.dealerForm = this.fb.group({
     kaveri_brands:  ['',Validators.required],

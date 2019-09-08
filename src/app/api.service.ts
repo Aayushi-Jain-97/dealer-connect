@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpParams } from '@angular/common/http';
 import { Profile } from  './profile';
 import { Salesmen } from  './salesmen';
+import { Feedback } from  './feedback';
 import { Observable } from  'rxjs';
 
 @Injectable({
@@ -9,7 +10,9 @@ import { Observable } from  'rxjs';
 })
 
 export class ApiService {
+  // PHP_API_SERVER = "http://kaveritest.bitnamiapp.com/dc";
   PHP_API_SERVER = "http://127.0.0.1";
+
 
   //  headerOptions = new HttpHeaders();
     
@@ -55,5 +58,8 @@ export class ApiService {
   }
   insertSalesmenProfile(salesmen){
     return this.httpClient.post(`${this.PHP_API_SERVER}/api/salesmen-profiles/insert.php`, salesmen);
+  }
+  getFeedback(): Observable<Feedback[]>{
+    return this.httpClient.get<Feedback[]>(`${this.PHP_API_SERVER}/api/feedback/getFeedback.php`);
   }
 }

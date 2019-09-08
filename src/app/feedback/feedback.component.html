@@ -1,1 +1,116 @@
-<p>feedback works!</p>
+<div class="wrapper">
+    <app-header></app-header>
+     <!-- Content Wrapper. Contains page content -->
+     <div class="content-wrapper" style="padding-top:50px;">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Dashboard
+            <small>Version 2.0</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a [routerLink]="['/dashboard']"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Feedback</li>
+          </ol>
+        </section>
+    
+        <!-- Main content -->
+        <section class="content">
+          <div class="row">
+              <div class="col-xs-12">
+                  <div class="box">
+                      <div class="box-header">
+                          <h3 class="box-title">Feedback</h3>
+                        </div>
+                        <!-- /.box-header -->          
+                      <div class="box-body table-responsive">
+              <table datatable [dtOptions]="dtOptions" [dtTrigger]="subject" class="table table-bordered row-border table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Dealer ID</th>
+                      <th scope="col">Dealer Name</th>
+                      <th scope="col">Type</th>
+                      <th scope="col">Date</th>
+                      <th scope="col">Comments</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let feed of feedback" scope="row">
+                      <td>{{ feed.id }}</td>
+                      <td (click)="getDealerDetail(feed.id)" style="cursor: pointer;color:#28669b" data-toggle="modal" data-target="#modal-default">{{ feed.dealer_firm_name }}</td>
+                      <td>{{ feed.type }}</td>
+                      <td>{{ feed.fdbk_date }}</td>
+                      <td>{{ feed.comments }}</td>
+                    </tr>
+                  </tbody>
+                  </table>
+                  </div>
+                  </div>
+                  </div>
+          </div>
+          <!-- /.row -->
+ <!--modal start-->
+ <div class="modal fade" id="modal-default" *ngIf="showModal">
+    <div class="modal-dialog">
+        <div class="modal-content" style="border-top-color: #00a65a;border-radius: 3px;border-top: 3px solid #00a65a;">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">Dealer Details</h4>
+        </div>
+        <div class="modal-body">
+            <section class="invoice">
+                <!-- info row -->
+                <div class="row invoice-info">
+                  <div class="col-sm-4 invoice-col">
+                    <address>
+                      <strong>Dealer Firm Name</strong><br>
+                      {{details[0]['dealer_firm_name']}}
+                    </address>
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-4 invoice-col">
+                    <address>
+                      <strong>Location</strong><br>
+                      {{details[0]['location']}}
+                    </address>
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-4 invoice-col">
+                      <b>Mobile :</b> {{details[0]['mobile']}}<br>
+                    <b>Dealer ID :</b> {{details[0]['dealer_id']}} <br>
+                    <b>Kaveri Code :</b> {{details[0]['kaveri_code']}} <br>
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+          
+                <div class="row">
+                  <!-- accepted payments column -->
+                  <div class="col-xs-12">
+                    <p><b> Bill To Address</b></p>
+                    <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                       {{details[0]['bill_to_address']}}
+                      </p>
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+              </section>
+              <!-- /.content -->
+        </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+        </section>
+        <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
+     
+    </div>
+    <!-- ./wrapper -->
+   
